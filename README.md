@@ -1,2 +1,2 @@
-# rentman
+# Rentman
 Rental property management software 
