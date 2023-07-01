@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -22,24 +22,44 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/property-list">
                 Properties
-              </a>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                to="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 People
-              </a>
+              </Link>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="#">
+                  Tenants
+                </a>
+                <a className="dropdown-item" href="#">
+                  Landlords
+                </a>
+                <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="#">
+                  Contractors
+                </a>
+              </div>
             </li>
             <li className="nav-item">
-              <a className="nav-link disabled" href="#">
+              <Link className="nav-link disabled" to="#">
                 Admin
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

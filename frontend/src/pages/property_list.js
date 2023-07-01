@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const PropertyListPage = () => {
+const PropertyList = () => {
   let [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -29,4 +29,4 @@ const PropertyListPage = () => {
   );
 };
 
-export default PropertyListPage;
+export default PropertyList;

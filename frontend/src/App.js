@@ -1,23 +1,22 @@
 import "./App.css";
 import Header from "./components/header";
 import Navbar from "./components/navbar";
-import PropertyListPage from "./pages/property_list_page";
-import TenantListPage from "./pages/tenant_list_page";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./pages/home";
+import PropertyList from "./pages/property_list";
+import TenantList from "./pages/tenant_list_page";
+import { Routes, Route } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      {/* <BrowserRouter>
-      <Routes>
-        <Route path="/property-list" component={PropertyListPage}></Route>
-        <Route path="/tenant-list" component={TenantListPage}></Route>
-      </Routes>
-      </BrowserRouter> */}
       <Navbar />
-      <PropertyListPage />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/property-list" element={<PropertyList />} />
+        <Route path="/tenant-list" element={<TenantList />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
