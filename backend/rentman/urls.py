@@ -21,6 +21,6 @@ app_name = "rentman"
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("rentals/", include("rentals.urls", namespace="rentals")),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api/rentals/", include("rentals.urls", namespace="rentals")),
+    path("api/auth/", include("rest_framework.urls", namespace="rest_framework")),
 ]
