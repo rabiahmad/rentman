@@ -14,9 +14,9 @@ const PropertyList = () => {
   };
 
   return (
-    <div className="property-container">
+    <div>
       <h2>Properties</h2>
-      <div className="property-list">
+      <div className="list-container">
         <ul className="list-group list-group-flush">
           {properties.map((property, index) => (
             <li key={index} className="list-group-item">
