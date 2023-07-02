@@ -1,8 +1,5 @@
 import React, { useContext } from "react";
 import { PropertyContext } from "./property_context";
-// import Icon from "react-crud-icons";
-// import "react-crud-icons/dist/react-crud-icons.css";
-import { ReactComponent as DeleteButton } from "../assets/deletebutton.svg";
 
 const DeleteProperty = ({ propertyId, onDelete }) => {
   const { triggerRefresh } = useContext(PropertyContext);
