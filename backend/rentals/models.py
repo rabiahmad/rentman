@@ -22,7 +22,7 @@ class Property(models.Model):
         END_OF_TERRACE = "End terrace"
         BUNGALOW = "Bungalow"
         COTTAGE = "Cottage"
-        SEMI_DETATCHED = "Semi-detatched"
+        SEMI_DETACHED = "Semi-detached"
         DETATCHED = "Detached"
         MANSION = "Mansion"
 

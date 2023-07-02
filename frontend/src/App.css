@@ -39,41 +39,37 @@ font-size: 47px;
 }
 
 
-
-
-.flexbox{
-	display:flex;
-	flex-direction:column;
-	width:80%;
-  min-width:200px;
-
-  margin:auto;
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.speechbubble {
-  background: url(https://poqueiraweb.com/link2/speechbubble5.svg);
-  background-repeat: no-repeat;
-  background-size:100% 100%;
-  
-  font-size:130%;
-  text-align:center;
-  font-weight:bold;
-  
-	 p{   margin: 0 auto;
-	    	margin-bottom: 20px;
-			  text-align:center;
-   	    width:80%;
-       &:first-child{
-		    	padding-top:20px;
-		    }	  
-    } 
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
 }
 
-.speechbubble-tail {
-	    width:100%;   
-	    background-image: url('https://poqueiraweb.com/link2/speechbubble5-tail.svg');
-	    background-size: 100% 100%;
-    	background-repeat: no-repeat;
-	    height: 50px;
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  }
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

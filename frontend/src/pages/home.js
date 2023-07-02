@@ -2,12 +2,18 @@ import React from "react";
 import LogoImage from "../components/logo_image";
 import LogoWithText from "../components/logo_with_text";
 import LargeHomeLogo from "../components/large_home_logo";
-import HomeSpeechBubble from "../components/home_speech_bubble";
-import LargeHomeLogoWithSpeechBubble from "../components/large_home_logo_with_speech_bubble";
+import RentmanSpeech from "../components/rentman_speech";
+import RentmanComic from "../components/rentman_comic";
 
 const Home = () => {
-  return <LargeHomeLogo />;
-  // return <LargeHomeLogoWithSpeechBubble />;
+  return (
+    <div>
+      <style>{"body { background-color: red; }"}</style>
+      <RentmanSpeech />
+      {/* <LargeHomeLogo /> */}
+      {/* <RentmanComic /> */}
+    </div>
+  );
 };
 
 export default Home;

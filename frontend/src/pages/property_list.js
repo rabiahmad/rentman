@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AddPropertyForm from "../components/add_property_form";
 
 const PropertyList = () => {
   let [properties, setProperties] = useState([]);
@@ -25,6 +26,7 @@ const PropertyList = () => {
           ))}
         </ul>
       </div>
+      <AddPropertyForm />
     </div>
   );
 };
