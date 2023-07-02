@@ -14,8 +14,24 @@ class Property(models.Model):
         max_length=8, blank=False, null=False
     )  # TODO add regex validation for postcode
 
+    class PropertyType(models.TextChoices):
+        STUDIO = "Studio"
+        FLAT = "Flat"
+        MAISONETTE = "Maisonette"
+        TERRACE = "Terrace"
+        END_OF_TERRACE = "End terrace"
+        BUNGALOW = "Bungalow"
+        COTTAGE = "Cottage"
+        SEMI_DETATCHED = "Semi-detatched"
+        DETATCHED = "Detached"
+        MANSION = "Mansion"
+
+    property_type = models.CharField(
+        choices=PropertyType.choices, max_length=50, null=False, blank=False
+    )
+
     def __str__(self):
-        return ", ".join([self.house_number, self.street, self.town, self.postcode])
+        return " ".join([self.house_number, self.street])
 
 
 class BasePerson(models.Model):
@@ -26,7 +42,7 @@ class BasePerson(models.Model):
         MISS = "Miss"
         DR = "Dr"
 
-    title = models.CharField(max_length=4, choices=Title.choices)
+    title = models.CharField(choices=Title.choices, max_length=4)
     first_name = models.TextField(null=False, blank=False)
     middle_name = models.TextField(null=True, blank=True)
     last_name = models.TextField(null=False, blank=False)

@@ -3,3 +3,77 @@
   font-weight: 750;
   font-size: 36px;
 }
+
+.navbar-nav{
+  margin-left: 30%;
+}
+
+.home-logo{
+  transform: scale(1.34);
+  margin-right: 65%;
+  margin-left: auto;
+  margin-top: 6.5%;
+}
+
+.logo-text{
+display: inline-block;
+font-weight: bolder;
+font-size: 47px;
+}
+
+.logo-with-text-container {
+  display: flex;
+  width: 300px;
+  margin-bottom: -10%;
+  margin-top: -5%;
+}
+
+.side {
+  flex: 1;
+  padding: 10px;
+}
+
+.side-content-center {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+.flexbox{
+	display:flex;
+	flex-direction:column;
+	width:80%;
+  min-width:200px;
+
+  margin:auto;
+}
+
+.speechbubble {
+  background: url(https://poqueiraweb.com/link2/speechbubble5.svg);
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+  
+  font-size:130%;
+  text-align:center;
+  font-weight:bold;
+  
+	 p{   margin: 0 auto;
+	    	margin-bottom: 20px;
+			  text-align:center;
+   	    width:80%;
+       &:first-child{
+		    	padding-top:20px;
+		    }	  
+    } 
+}
+
+.speechbubble-tail {
+	    width:100%;   
+	    background-image: url('https://poqueiraweb.com/link2/speechbubble5-tail.svg');
+	    background-size: 100% 100%;
+    	background-repeat: no-repeat;
+	    height: 50px;
+
+  }

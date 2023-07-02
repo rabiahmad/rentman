@@ -5,7 +5,7 @@ from .serializers import (
     PropertySerializer,
     TenancySerializer,
 )
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 
 
 class TenantViewSet(viewsets.ModelViewSet):
@@ -15,6 +15,7 @@ class TenantViewSet(viewsets.ModelViewSet):
 
     queryset = Tenant.objects.all()
     serializer_class = TenantSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class LandlordViewSet(viewsets.ModelViewSet):
@@ -24,6 +25,7 @@ class LandlordViewSet(viewsets.ModelViewSet):
 
     queryset = Landlord.objects.all()
     serializer_class = LandlordSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class PropertyViewSet(viewsets.ModelViewSet):
@@ -33,6 +35,7 @@ class PropertyViewSet(viewsets.ModelViewSet):
 
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class TenancyViewSet(viewsets.ModelViewSet):
@@ -42,3 +45,4 @@ class TenancyViewSet(viewsets.ModelViewSet):
 
     queryset = Tenancy.objects.all()
     serializer_class = TenancySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]

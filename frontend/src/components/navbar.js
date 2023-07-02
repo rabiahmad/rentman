@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import LogoWithText from "./logo_with_text";
 
 const Navbar = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="#">
-          rentman.
-        </a>
+        <Link className="navbar-brand" to="/">
+          <div>
+            {/* <div>rentman.</div> */}
+            <LogoWithText />
+          </div>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

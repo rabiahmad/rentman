@@ -2,25 +2,57 @@ from rest_framework import serializers
 from .models import Tenant, Landlord, Property, Tenancy
 
 
-class TenantSerializer(serializers.ModelSerializer):
+class TenantSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tenant
-        fields = "__all__"
+        fields = fields = [
+            "id",
+            "title",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "phone",
+            "email",
+        ]
 
 
-class LandlordSerializer(serializers.ModelSerializer):
+class LandlordSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Landlord
-        fields = "__all__"
+        fields = fields = [
+            "id",
+            "title",
+            "first_name",
+            "middle_name",
+            "last_name",
+            "phone",
+            "email",
+        ]
 
 
-class PropertySerializer(serializers.ModelSerializer):
+class PropertySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Property
-        fields = "__all__"
+        fields = [
+            "id",
+            "house_number",
+            "street",
+            "town",
+            "postcode",
+            "property_type",
+        ]
 
 
+# TODO figure out why HyperlinkModelSerializer cant be used
 class TenancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Tenancy
-        fields = "__all__"
+        fields = [
+            "id",
+            "property",
+            "start_date",
+            "end_date",
+            "rent",
+            "landlord",
+            "tenants",
+        ]

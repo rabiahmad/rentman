@@ -136,6 +136,14 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:8000/api/rentals/properties/",
 # ]
 
+# TODO fix this
 # CORS_ALLOWED_ORIGIN_REGEXES = [
 #     r"http://127.0.0.1:8000/api/rentals/properties/",
 # ]
+
+
+# TODO fix this
+# REST_FRAMEWORK = {
+#     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+#     "PAGE_SIZE": 20,
+# }

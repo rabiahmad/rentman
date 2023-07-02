@@ -11,12 +11,14 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/property-list" element={<PropertyList />} />
-        <Route path="/tenant-list" element={<TenantList />} />
-        <Route path="/landlord-list" element={<LandlordList />} />
-      </Routes>
+      <div class="container-fluid">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/property-list" element={<PropertyList />} />
+          <Route path="/tenant-list" element={<TenantList />} />
+          <Route path="/landlord-list" element={<LandlordList />} />
+        </Routes>
+      </div>
     </div>
   );
 };
