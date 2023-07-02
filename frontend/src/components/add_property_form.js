@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { PropertyContext } from "./property_context";
 
 const AddPropertyForm = () => {
+  const { triggerRefresh } = useContext(PropertyContext);
+
   const [propertyData, setPropertyData] = useState({
     house_number: "",
     street: "",
@@ -18,21 +21,36 @@ const AddPropertyForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Perform API request to submit the property data
-    console.log("propertyData", propertyData);
-    console.log("setPropertyData", setPropertyData);
-    // Reset the form after submission
-    setPropertyData({
-      house_number: "",
-      street: "",
-      town: "",
-      postcode: "",
-      property_type: "",
-    });
-    // Close the modal after submission
-    setShowModal(false);
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/rentals/properties/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(propertyData),
+      });
+      if (response.ok) {
+        // Property data successfully submitted
+        console.log("Property added successfully!");
+        // Reset the form after submission
+        setPropertyData({
+          house_number: "",
+          street: "",
+          town: "",
+          postcode: "",
+          property_type: "",
+        });
+        // Close the modal after submission
+        handleCloseModal();
+      } else {
+        // Handle the case when the request is not successful
+        console.error("Error adding property. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error adding property:", error);
+    }
   };
 
   const handleOpenModal = () => {
@@ -41,11 +59,18 @@ const AddPropertyForm = () => {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    triggerRefresh(); // Call triggerRefresh to refresh the PropertyList component
   };
 
   return (
     <div>
-      <button onClick={handleOpenModal}>Add new property</button>
+      <img
+        width="48"
+        height="48"
+        src="https://img.icons8.com/color/48/filled-plus-2-math.png"
+        onClick={handleOpenModal}
+        alt="Add new property"
+      />
 
       {showModal && (
         <div className="modal">
@@ -92,7 +117,16 @@ const AddPropertyForm = () => {
                   onChange={handleChange}
                 />
               </div>
-              <button type="submit">Add Property</button>
+              <button type="submit">Submit</button>
+
+              {/* <img
+                width="48"
+                height="48"
+                src="https://img.icons8.com/color/48/filled-plus-2-math.png"
+                alt="filled-plus-2-math"
+              /> */}
+
+              {/* <input type="image" src="https://img.icons8.com/color/48/filled-plus-2-math.png" alt="Submit"></input> */}
             </form>
           </div>
         </div>

@@ -1,11 +1,17 @@
+.container-fluid{
+  /* margin-left: 1.5%; */
+}
+
 .navbar-brand{
   margin-left: 10px;
   font-weight: 750;
   font-size: 36px;
 }
 
-.navbar-nav{
-  margin-left: 30%;
+.navbar{
+/* max-height: 55px; */
+margin-bottom: 2%;
+/* max-height:3.5rem; */
 }
 
 .home-logo{

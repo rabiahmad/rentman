@@ -1,17 +1,29 @@
-import React, { useState, useEffect } from "react";
-import AddPropertyForm from "../components/add_property_form";
+import React, { useState, useEffect, useContext } from "react";
+import { PropertyContext } from "../components/property_context";
+import DeleteProperty from "../components/delete_property";
 
 const PropertyList = () => {
-  let [properties, setProperties] = useState([]);
+  const { refreshList, completeRefresh } = useContext(PropertyContext);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     getProperties();
-  }, []);
+  }, [refreshList]);
 
-  let getProperties = async () => {
-    let response = await fetch("http://127.0.0.1:8000/api/rentals/properties/");
-    let data = await response.json();
-    setProperties(data);
+  const getProperties = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/rentals/properties/");
+      if (response.ok) {
+        const data = await response.json();
+        setProperties(data);
+      } else {
+        console.error("Error fetching properties. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    } finally {
+      completeRefresh();
+    }
   };
 
   return (
@@ -22,11 +34,11 @@ const PropertyList = () => {
           {properties.map((property, index) => (
             <li key={index} className="list-group-item">
               {property.house_number} {property.street}, {property.town}
+              <DeleteProperty propertyId={property.id} />
             </li>
           ))}
         </ul>
       </div>
-      <AddPropertyForm />
     </div>
   );
 };
