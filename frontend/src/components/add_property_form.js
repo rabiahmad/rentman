@@ -21,6 +21,17 @@ const AddPropertyForm = () => {
     }));
   };
 
+  const resetForm = () => {
+    console.log("Form has been reset");
+    setPropertyData({
+      house_number: "",
+      street: "",
+      town: "",
+      postcode: "",
+      property_type: "",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,14 +45,7 @@ const AddPropertyForm = () => {
       if (response.ok) {
         // Property data successfully submitted
         console.log("Property added successfully!");
-        // Reset the form after submission
-        setPropertyData({
-          house_number: "",
-          street: "",
-          town: "",
-          postcode: "",
-          property_type: "",
-        });
+
         // Close the modal after submission
         handleCloseModal();
       } else {
@@ -60,74 +64,134 @@ const AddPropertyForm = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     triggerRefresh(); // Call triggerRefresh to refresh the PropertyList component
+    resetForm();
   };
 
   return (
     <div>
       <img
-        width="48"
-        height="48"
+        width="45"
+        height="45"
         src="https://img.icons8.com/color/48/filled-plus-2-math.png"
         onClick={handleOpenModal}
         alt="Add new property"
       />
 
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-              &times;
-            </span>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="house_number">House Number:</label>
-                <input
-                  type="text"
-                  id="house_number"
-                  name="house_number"
-                  value={propertyData.house_number}
-                  onChange={handleChange}
-                />
+        <div className="modal" tabindex="-1" role="dialog">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Enter Property Details</h5>
               </div>
-              <div>
-                <label htmlFor="street">Street:</label>
-                <input type="text" id="street" name="street" value={propertyData.street} onChange={handleChange} />
-              </div>
-              <div>
-                <label htmlFor="town">Town:</label>
-                <input type="text" id="town" name="town" value={propertyData.town} onChange={handleChange} />
-              </div>
-              <div>
-                <label htmlFor="postcode">Postcode:</label>
-                <input
-                  type="text"
-                  id="postcode"
-                  name="postcode"
-                  value={propertyData.postcode}
-                  onChange={handleChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="property_type">Property Type:</label>
-                <input
-                  type="text"
-                  id="property_type"
-                  name="property_type"
-                  value={propertyData.property_type}
-                  onChange={handleChange}
-                />
-              </div>
-              <button type="submit">Submit</button>
 
-              {/* <img
-                width="48"
-                height="48"
-                src="https://img.icons8.com/color/48/filled-plus-2-math.png"
-                alt="filled-plus-2-math"
-              /> */}
+              <div class="modal-body">
+                <div className="col-xs-12 col-sm-12">
+                  <form role="form" className="form-horizontal" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                      <div className="col-xs-3 text-right">
+                        <label htmlFor="house_number" className="col-xs-3 text-right">
+                          House Number
+                        </label>
+                      </div>
 
-              {/* <input type="image" src="https://img.icons8.com/color/48/filled-plus-2-math.png" alt="Submit"></input> */}
-            </form>
+                      <div className="col-xs-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="house_number"
+                          name="house_number"
+                          value={propertyData.house_number}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="col-xs-3 text-right">
+                        <label htmlFor="street" className="col-xs-3 text-right">
+                          Street
+                        </label>
+                      </div>
+
+                      <div className="col-xs-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="street"
+                          name="street"
+                          value={propertyData.street}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-group">
+                      <div className="col-xs-3 text-right">
+                        <label htmlFor="town" className="col-xs-3 text-right">
+                          Town
+                        </label>
+                      </div>
+
+                      <div className="col-xs-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="town"
+                          name="town"
+                          value={propertyData.town}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="col-xs-3 text-right">
+                        <label htmlFor="postcode" className="col-xs-3 text-right">
+                          Postcode
+                        </label>
+                      </div>
+
+                      <div className="col-xs-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="postcode"
+                          name="postcode"
+                          value={propertyData.postcode}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <div className="col-xs-3 text-right">
+                        <label htmlFor="property_type" className="col-xs-3 text-right">
+                          Property Type
+                        </label>
+                      </div>
+
+                      <div className="col-xs-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          id="property_type"
+                          name="property_type"
+                          value={propertyData.property_type}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button type="button submit" className="btn btn-primary" onClick={handleSubmit}>
+                  Submit
+                </button>
+                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={handleCloseModal}>
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

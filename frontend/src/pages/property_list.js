@@ -33,8 +33,8 @@ const PropertyList = () => {
         <ul className="list-group list-group-flush">
           {properties.map((property, index) => (
             <li key={index} className="list-group-item">
-              {property.house_number} {property.street}, {property.town}
               <DeleteProperty propertyId={property.id} />
+              {property.house_number} {property.street}, {property.town}
             </li>
           ))}
         </ul>
