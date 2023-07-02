@@ -6,6 +6,7 @@ import TenantList from "./pages/tenant_list_page";
 import LandlordList from "./pages/landlord_list";
 import PropertyListWrapper from "./pages/property_list_wrapper";
 import { Routes, Route } from "react-router-dom";
+import SearchBar from "./components/searchbar";
 
 const App = () => {
   return (

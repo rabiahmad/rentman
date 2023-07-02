@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoWithText from "./logo_with_text";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const Navbar = () => {
   return (
@@ -35,43 +36,25 @@ const Navbar = () => {
                 Properties
               </Link>
             </li>
-            <li className="nav-item dropdown">
-              <Link
-                className="nav-link dropdown-toggle"
-                to="#"
-                id="navbarDropdown"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                People
-              </Link>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">
+            <NavDropdown title="People" id="basic-nav-dropdown">
+              <NavDropdown.Item className="nav-item">
+                <Link className="dropdown-item" to="/tenant-list">
                   Tenants
-                </a>
-                <a className="dropdown-item" href="#">
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="/landlord-list">
                   Landlords
-                </a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="#">
                   Contractors
-                </a>
-              </div>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/tenant-list">
-                Tenants
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/landlord-list">
-                Landlords
-              </Link>
-            </li>
+                </Link>
+              </NavDropdown.Item>
+            </NavDropdown>
 
             <li className="nav-item">
               <Link className="nav-link disabled" to="#">

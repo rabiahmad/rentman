@@ -6,12 +6,12 @@
   margin-left: 10px;
   font-weight: 750;
   font-size: 36px;
+  max-height: 50px;
+  margin-top: -20px;
 }
 
-.navbar{
-/* max-height: 55px; */
+.navbar{;
 margin-bottom: 2%;
-/* max-height:3.5rem; */
 }
 
 .home-logo{
@@ -45,7 +45,7 @@ font-size: 47px;
 }
 
 
-.modal {
+/* .modal {
   display: block;
   position: fixed;
   z-index: 1;
@@ -62,7 +62,7 @@ font-size: 47px;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-}
+} */
 
 .close {
   color: #aaa;
