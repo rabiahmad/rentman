@@ -6,6 +6,7 @@ from datetime import datetime
 class Property(models.Model):
     class Meta:
         verbose_name_plural = "Properties"
+        ordering = ["street"]
 
     house_number = models.TextField(null=False, blank=False)
     street = models.TextField(null=False, blank=False)
