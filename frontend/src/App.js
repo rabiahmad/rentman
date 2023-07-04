@@ -7,6 +7,7 @@ import LandlordList from "./pages/landlord_list";
 import PropertyListWrapper from "./pages/property_list_wrapper";
 import { Routes, Route } from "react-router-dom";
 import SearchBar from "./components/searchbar";
+import PropertyDetail from "./pages/PropertyDetail";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/property-list" element={<PropertyListWrapper />} />
+          <Route path="/property/:propertyId" element={<PropertyDetail />} />
           <Route path="/tenant-list" element={<TenantList />} />
           <Route path="/landlord-list" element={<LandlordList />} />
         </Routes>

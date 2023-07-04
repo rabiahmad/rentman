@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { PropertyContext } from "./property_context";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -37,7 +37,7 @@ const AddPropertyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/rentals/properties/", {
+      const response = await fetch("/api/rentals/properties/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,6 +64,30 @@ const AddPropertyForm = () => {
     triggerRefresh();
     resetForm();
   };
+
+  useEffect(() => {
+    const fetchPropertyTypes = async () => {
+      try {
+        const response = await fetch("/api/rentals/property_types/");
+        if (response.ok) {
+          const data = await response.json();
+          return data.property_type;
+        } else {
+          console.error("Error fetching property types.");
+          return [];
+        }
+      } catch (error) {
+        console.error("Error fetching property types:", error);
+        return [];
+      }
+    };
+
+    fetchPropertyTypes()
+      .then((types) => setPropertyTypes(types))
+      .catch((error) => console.error("Error setting property types:", error));
+  }, []);
+
+  const [propertyTypes, setPropertyTypes] = useState([]);
 
   return (
     <>
@@ -99,12 +123,14 @@ const AddPropertyForm = () => {
             </Form.Group>
             <Form.Group>
               <Form.Label>Property Type:</Form.Label>
-              <Form.Control
-                type="text"
-                name="property_type"
-                value={propertyData.property_type}
-                onChange={handleChange}
-              />
+              <Form.Control as="select" name="property_type" value={propertyData.property_type} onChange={handleChange}>
+                <option value="">Select Property Type</option>
+                {propertyTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal}>

@@ -26,6 +26,7 @@ class Property(models.Model):
         SEMI_DETACHED = "Semi-detached"
         DETATCHED = "Detached"
         MANSION = "Mansion"
+        LAND = "Land"
 
     property_type = models.CharField(
         choices=PropertyType.choices, max_length=50, null=False, blank=False

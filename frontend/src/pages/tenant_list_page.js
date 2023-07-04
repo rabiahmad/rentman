@@ -8,7 +8,7 @@ const TenantList = () => {
   }, []);
 
   let getTenants = async () => {
-    let response = await fetch("http://127.0.0.1:8000/api/rentals/tenants/");
+    let response = await fetch("/api/rentals/tenants/");
     let data = await response.json();
     setTenants(data);
   };

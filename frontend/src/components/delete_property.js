@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { PropertyContext } from "./property_context";
+// import { PropertyContext } from "./property_context";
 
 const DeleteProperty = ({ propertyId, onDelete }) => {
   const [modalShow, setModalShow] = React.useState(false);
-  const { triggerRefresh } = useContext(PropertyContext);
+  // const { triggerRefresh } = useContext(PropertyContext);
 
   function ConfirmDeleteModal(props) {
     return (
@@ -21,7 +21,7 @@ const DeleteProperty = ({ propertyId, onDelete }) => {
           <Button variant="secondary" onClick={props.onHide}>
             Close
           </Button>
-          <Button variant="warning" onClick={handleDelete}>
+          <Button variant="danger" onClick={handleDelete}>
             Delete
           </Button>
         </Modal.Footer>
@@ -30,13 +30,13 @@ const DeleteProperty = ({ propertyId, onDelete }) => {
   }
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/rentals/properties/${propertyId}`, {
+      const response = await fetch(`/api/rentals/properties/${propertyId}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
         console.log("Property deleted successfully!");
-        triggerRefresh();
+        // triggerRefresh();
       } else {
         console.error("Error deleting property. Please try again.");
       }

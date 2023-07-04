@@ -56,3 +56,7 @@ class TenancySerializer(serializers.ModelSerializer):
             "landlord",
             "tenants",
         ]
+
+
+class PropertyTypeSerializer(serializers.Serializer):
+    property_type = serializers.CharField()

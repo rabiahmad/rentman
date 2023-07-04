@@ -4,3 +4,8 @@
     grid-gap: 65px;
   }
   
+
+.card-link {
+  color: inherit;
+  text-decoration: none;
+}

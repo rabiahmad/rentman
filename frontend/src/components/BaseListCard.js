@@ -2,7 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-const BaseListCard = ({ title, text, deleteAction }) => {
+const BaseListCard = ({ title, text, deleteAction, viewAction, editAction }) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Img variant="top" />

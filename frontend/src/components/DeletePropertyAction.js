@@ -9,7 +9,7 @@ const DeletePropertyAction = ({ propertyId, onDelete }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/rentals/properties/${propertyId}`, {
+      const response = await fetch(`/api/rentals/properties/${propertyId}`, {
         method: "DELETE",
       });
 

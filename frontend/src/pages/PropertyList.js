@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { PropertyContext } from "../components/property_context";
-import BaseListCard from "../components/BaseListCard";
-import DeletePropertyAction from "../components/DeletePropertyAction";
-import "../assets/css/PropertyList.css";
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const PropertyList = () => {
   const { refreshList, completeRefresh, triggerRefresh } = useContext(PropertyContext);
@@ -32,33 +33,26 @@ const PropertyList = () => {
     setProperties((prevProperties) => prevProperties.filter((property) => property.id !== propertyId));
   };
 
-  const generateCard = (property) => {
+  const generateOutput = (property) => {
     const title = property.house_number + " " + property.street + ", " + property.town;
-    const text =
-      property.house_number +
-      " " +
-      property.street +
-      ", " +
-      property.town +
-      " " +
-      property.postcode +
-      ", " +
-      property.property_type;
+    const detailLink = `/property/${property.id}`;
 
     return (
-      <BaseListCard
-        key={property.id}
-        title={title}
-        text={text}
-        deleteAction={<DeletePropertyAction propertyId={property.id} onDelete={handleDeleteProperty} />}
-      />
+      <Col key={property.id} md={4} style={{ marginBottom: "1rem" }}>
+        <Card bg="light">
+          <Card.Body>
+            <Link to={detailLink} className="card-link" style={{ textDecoration: "none" }}>
+              <Card.Title>{title}</Card.Title>
+            </Link>
+          </Card.Body>
+        </Card>
+      </Col>
     );
   };
 
   return (
     <div>
-      <h2>Properties</h2>
-      <div className="property-grid">{properties.map((property) => generateCard(property))}</div>
+      <Row>{properties.map((property) => generateOutput(property))}</Row>
     </div>
   );
 };

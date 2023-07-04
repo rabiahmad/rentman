@@ -8,7 +8,7 @@ const LandlordList = () => {
   }, []);
 
   let getLandlords = async () => {
-    let response = await fetch("http://127.0.0.1:8000/api/rentals/landlords/");
+    let response = await fetch("/api/rentals/landlords/");
     let data = await response.json();
     setLandlords(data);
   };
