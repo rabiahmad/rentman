@@ -4,6 +4,8 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import TenantGrid from "../components/TenantCard";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 const PropertyDetail = () => {
   const { propertyId } = useParams();
@@ -72,9 +74,14 @@ const PropertyDetail = () => {
       <p>Postcode: {property.postcode}</p>
       <p>Property Type: {property.property_type}</p>
 
-      <Button variant="danger" onClick={() => setModalShow(true)}>
-        Delete Property
-      </Button>
+      <div style={{ display: "flex", gap: "1rem" }}>
+        <Button variant="danger" onClick={() => setModalShow(true)}>
+          <AiOutlineDelete />
+        </Button>
+        <Button variant="primary">
+          <AiOutlineEdit />
+        </Button>
+      </div>
 
       <ConfirmDeleteModal show={modalShow} onHide={() => setModalShow(false)} onDelete={handleDelete} />
 
