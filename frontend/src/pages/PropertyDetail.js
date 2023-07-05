@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import DeleteProperty from "../components/delete_property";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 
 const PropertyDetail = () => {
   const { propertyId } = useParams();
   const [property, setProperty] = useState(null);
   const [tenancies, setTenancies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,6 +45,23 @@ const PropertyDetail = () => {
     return <LoadingSpinner />;
   }
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/rentals/properties/${propertyId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Property deleted successfully!");
+        navigate("/property-list");
+      } else {
+        console.error("Error deleting property. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
+  };
+
   return (
     <div>
       <h2>Property Details</h2>
@@ -52,7 +71,12 @@ const PropertyDetail = () => {
       <p>Town: {property.town}</p>
       <p>Postcode: {property.postcode}</p>
       <p>Property Type: {property.property_type}</p>
-      <DeleteProperty />
+
+      <Button variant="danger" onClick={() => setModalShow(true)}>
+        Delete Property
+      </Button>
+
+      <ConfirmDeleteModal show={modalShow} onHide={() => setModalShow(false)} onDelete={handleDelete} />
 
       {tenancies.length > 0 && tenancies.some((tenancy) => tenancy.property === property.id) ? (
         <>

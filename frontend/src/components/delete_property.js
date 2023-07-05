@@ -1,33 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-// import { PropertyContext } from "./property_context";
+import { useNavigate } from "react-router-dom";
 
 const DeleteProperty = ({ propertyId, onDelete }) => {
-  const [modalShow, setModalShow] = React.useState(false);
-  // const { triggerRefresh } = useContext(PropertyContext);
+  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
-  function ConfirmDeleteModal(props) {
-    return (
-      <Modal {...props} centered>
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">Warning.</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <h4>Confirm delete!</h4>
-          <p>Are you sure you want to delete this property?</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.onHide}>
-            Close
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  }
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/rentals/properties/${propertyId}`, {
@@ -36,7 +15,6 @@ const DeleteProperty = ({ propertyId, onDelete }) => {
 
       if (response.ok) {
         console.log("Property deleted successfully!");
-        // triggerRefresh();
       } else {
         console.error("Error deleting property. Please try again.");
       }
@@ -50,19 +28,37 @@ const DeleteProperty = ({ propertyId, onDelete }) => {
     }
   };
 
-  return (
-    <>
-      <img
-        width="30"
-        height="30"
-        src="https://img.icons8.com/fluency/48/delete-forever.png"
-        onClick={() => setModalShow(true)}
-        alt="delete"
-      />
+  const ConfirmDeleteModal = (props) => {
+    return (
+      <Modal centered show={props.show} onHide={props.onHide}>
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">Warning.</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <h4>Confirm delete!</h4>
+          <p>Are you sure you want to delete this property?</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={props.onHide}>
+            Close
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              handleDelete();
+              if (onDelete) {
+                onDelete();
+              }
+            }}
+          >
+            Delete Property
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
 
-      <ConfirmDeleteModal show={modalShow} onHide={() => setModalShow(false)} />
-    </>
-  );
+  return <ConfirmDeleteModal show={modalShow} onHide={() => setModalShow(false)} />;
 };
 
 export default DeleteProperty;
