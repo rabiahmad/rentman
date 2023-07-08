@@ -39,7 +39,9 @@ class Property(models.Model):
         verbose_name_plural = "Properties"
         ordering = ["street"]
 
-    landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE)
+    landlord = models.ForeignKey(
+        Landlord, on_delete=models.CASCADE, null=True, blank=True
+    )
     house_number = models.TextField(null=False, blank=False)
     street = models.TextField(null=False, blank=False)
     town = models.TextField(null=False, blank=False)

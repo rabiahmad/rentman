@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "../assets/css/PropertyList.css";
 
 const PropertyList = () => {
   const { refreshList, completeRefresh, triggerRefresh } = useContext(PropertyContext);
@@ -27,10 +28,6 @@ const PropertyList = () => {
     } finally {
       completeRefresh();
     }
-  };
-
-  const handleDeleteProperty = (propertyId) => {
-    setProperties((prevProperties) => prevProperties.filter((property) => property.id !== propertyId));
   };
 
   const generateOutput = (property) => {
