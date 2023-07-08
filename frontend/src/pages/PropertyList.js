@@ -38,14 +38,16 @@ const PropertyList = () => {
     const detailLink = `/property/${property.id}`;
 
     return (
-      <Col key={property.id} md={4} style={{ marginBottom: "1rem" }}>
-        <Card bg="light">
-          <Card.Body>
-            <Link to={detailLink} className="card-link" style={{ textDecoration: "none" }}>
-              <Card.Title>{title}</Card.Title>
-            </Link>
-          </Card.Body>
-        </Card>
+      <Col key={property.id} md={4}>
+        <div className="property-list-item">
+          <Card>
+            <Card.Body>
+              <Link to={detailLink} className="card-link">
+                <Card.Title>{title}</Card.Title>
+              </Link>
+            </Card.Body>
+          </Card>
+        </div>
       </Col>
     );
   };
