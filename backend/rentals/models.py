@@ -3,39 +3,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 from datetime import datetime
 
 
-class Property(models.Model):
-    class Meta:
-        verbose_name_plural = "Properties"
-        ordering = ["street"]
-
-    house_number = models.TextField(null=False, blank=False)
-    street = models.TextField(null=False, blank=False)
-    town = models.TextField(null=False, blank=False)
-    postcode = models.TextField(
-        max_length=8, blank=False, null=False
-    )  # TODO add regex validation for postcode
-
-    class PropertyType(models.TextChoices):
-        STUDIO = "Studio"
-        FLAT = "Flat"
-        MAISONETTE = "Maisonette"
-        TERRACE = "Terrace"
-        END_OF_TERRACE = "End terrace"
-        BUNGALOW = "Bungalow"
-        COTTAGE = "Cottage"
-        SEMI_DETACHED = "Semi-detached"
-        DETATCHED = "Detached"
-        MANSION = "Mansion"
-        LAND = "Land"
-
-    property_type = models.CharField(
-        choices=PropertyType.choices, max_length=50, null=False, blank=False
-    )
-
-    def __str__(self):
-        return " ".join([self.house_number, self.street])
-
-
 class BasePerson(models.Model):
     class Title(models.TextChoices):
         MR = "Mr"
@@ -67,6 +34,40 @@ class Landlord(BasePerson):
     pass
 
 
+class Property(models.Model):
+    class Meta:
+        verbose_name_plural = "Properties"
+        ordering = ["street"]
+
+    landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE)
+    house_number = models.TextField(null=False, blank=False)
+    street = models.TextField(null=False, blank=False)
+    town = models.TextField(null=False, blank=False)
+    postcode = models.TextField(
+        max_length=8, blank=False, null=False
+    )  # TODO add regex validation for postcode
+
+    class PropertyType(models.TextChoices):
+        STUDIO = "Studio"
+        FLAT = "Flat"
+        MAISONETTE = "Maisonette"
+        TERRACE = "Terrace"
+        END_OF_TERRACE = "End terrace"
+        BUNGALOW = "Bungalow"
+        COTTAGE = "Cottage"
+        SEMI_DETACHED = "Semi-detached"
+        DETATCHED = "Detached"
+        MANSION = "Mansion"
+        LAND = "Land"
+
+    property_type = models.CharField(
+        choices=PropertyType.choices, max_length=50, null=False, blank=False
+    )
+
+    def __str__(self):
+        return " ".join([self.house_number, self.street])
+
+
 class Tenancy(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     start_date = models.DateField(null=False, blank=False, default=datetime.now())
@@ -74,7 +75,9 @@ class Tenancy(models.Model):
         null=False, blank=False
     )  # TODO on save default to 12 months after start date
     rent = models.FloatField()
-    landlord = models.ForeignKey(Landlord, on_delete=models.CASCADE)
+    landlord = models.ForeignKey(
+        Landlord, on_delete=models.CASCADE, null=True, blank=True
+    )
     tenants = models.ManyToManyField(Tenant)
 
     class Meta:
