@@ -45,7 +45,7 @@ const TenantCard = ({ tenantId }) => {
       </Card.Body>
       <Card.Footer>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="primary" href={`/tenant/${tenantId}`}>
+          <Button variant="primary" href={`/tenants/${tenantId}`}>
             View
           </Button>
           <Button variant="secondary">Edit</Button>

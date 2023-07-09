@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { PropertyContext } from "../components/property_context";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import "../assets/css/PropertyList.css";
+import "../assets/css/ListItem.css";
 
 const PropertyList = () => {
-  const { refreshList, completeRefresh } = useContext(PropertyContext);
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
     getProperties();
-  }, [refreshList]);
+  }, [properties]);
 
   const getProperties = async () => {
     try {
@@ -26,32 +21,37 @@ const PropertyList = () => {
     } catch (error) {
       console.error("Error fetching properties:", error);
     } finally {
-      completeRefresh();
+      // completeRefresh();
     }
   };
 
   const generateOutput = (property) => {
     const title = property.house_number + " " + property.street + ", " + property.town;
-    const detailLink = `/property/${property.id}`;
+    const detailLink = `/properties/${property.id}`;
 
     return (
-      <Col key={property.id} md={4}>
-        <div className="property-list-item">
-          <Link to={detailLink} className="card-link">
-            <Card className="property-list-card">
-              <Card.Body>
-                <Card.Title>{title}</Card.Title>
-              </Card.Body>
-            </Card>
-          </Link>
+      <Link to={detailLink} className="item-link">
+        <div className="list-item" key={property.id}>
+          {title}
         </div>
-      </Col>
+      </Link>
     );
   };
 
   return (
     <div>
-      <Row>{properties.map((property) => generateOutput(property))}</Row>
+      <h2>Properties</h2>
+      <ul>{properties.map((property) => generateOutput(property))}</ul>
+
+      <Link to="/properties/add">
+        <img
+          width="45"
+          height="45"
+          src="https://img.icons8.com/color/48/filled-plus-2-math.png"
+          href="/properties/add"
+          alt="Add new property"
+        />
+      </Link>
     </div>
   );
 };

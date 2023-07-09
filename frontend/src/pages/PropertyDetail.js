@@ -47,6 +47,10 @@ const PropertyDetail = () => {
     return <LoadingSpinner />;
   }
 
+  const handleEdit = () => {
+    navigate(`/properties/${property?.id}/edit`, { state: property });
+  };
+
   const handleDelete = async () => {
     try {
       const response = await fetch(`/api/rentals/properties/${propertyId}`, {
@@ -55,7 +59,7 @@ const PropertyDetail = () => {
 
       if (response.ok) {
         console.log("Property deleted successfully!");
-        navigate("/property-list");
+        navigate("/properties");
       } else {
         console.error("Error deleting property. Please try again.");
       }
@@ -79,7 +83,7 @@ const PropertyDetail = () => {
         <Button variant="danger" onClick={() => setModalShow(true)}>
           <AiOutlineDelete />
         </Button>
-        <Button variant="primary">
+        <Button variant="primary" onClick={handleEdit}>
           <AiOutlineEdit />
         </Button>
       </div>

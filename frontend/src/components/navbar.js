@@ -32,19 +32,19 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/property-list">
+              <Link className="nav-link" to="/properties">
                 Properties
               </Link>
             </li>
             <NavDropdown title="People" id="basic-nav-dropdown">
               <NavDropdown.Item className="nav-item">
-                <Link className="dropdown-item" to="/tenant-list">
+                <Link className="dropdown-item" to="/tenants">
                   Tenants
                 </Link>
               </NavDropdown.Item>
 
               <NavDropdown.Item>
-                <Link className="dropdown-item" to="/landlord-list">
+                <Link className="dropdown-item" to="/landlords">
                   Landlords
                 </Link>
               </NavDropdown.Item>

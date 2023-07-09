@@ -1,0 +1,20 @@
+.list-item{
+    padding: 10px 16px;
+    margin: 20px 0;
+  }
+  
+.list-item:hover{
+    box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+    background-color: #72bbe269;
+}
+
+
+.item-link{
+    display: block;
+    color: black;
+}
+
+.item-link:link { text-decoration: none; }
+.item-link:visited { text-decoration: none; }
+.item-link:hover { text-decoration: none; }
+.item-link:active { text-decoration: none; }
