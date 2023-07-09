@@ -20,9 +20,11 @@ const TenantList = () => {
     const tenantDetailLink = `/tenant/${tenant.id}`;
 
     return (
-      <div className="tenant-list-item" key={tenant.id}>
-        <Link to={tenantDetailLink}>{name}</Link>
-      </div>
+      <Link to={tenantDetailLink} style={{ display: "block" }}>
+        <div className="tenant-list-item" key={tenant.id}>
+          {name}
+        </div>
+      </Link>
     );
   };
 

@@ -1,10 +1,9 @@
 .tenant-list-item{
     padding: 10px 16px;
     margin: 20px 0;
-    /* border-bottom: 1px solid #d82121fa; */
-    fill: bisque;
   }
   
   .tenant-list-item:hover{
     box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+    background-color: #697e877f;
   }

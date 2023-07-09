@@ -10,7 +10,7 @@ const TenantDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const tenantResponse = await fetch(`/api/rentals/tenant/${tenantId}`);
+        const tenantResponse = await fetch(`/api/rentals/tenants/${tenantId}`);
         if (tenantResponse.ok) {
           const tenantData = await tenantResponse.json();
           setTenant(tenantData);
@@ -32,7 +32,16 @@ const TenantDetail = () => {
 
   return (
     <div>
-      <h2>Tenant - {tenantId}</h2>
+      <h2>
+        {tenant.first_name} {tenant.last_name}
+      </h2>
+      {tenant && (
+        <div>
+          <p>Email: {tenant.email}</p>
+          <p>Phone: {tenant.phone}</p>
+          <p>Notes: {tenant.notes}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import "../assets/css/PropertyList.css";
 
 const PropertyList = () => {
-  const { refreshList, completeRefresh, triggerRefresh } = useContext(PropertyContext);
+  const { refreshList, completeRefresh } = useContext(PropertyContext);
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -37,13 +37,13 @@ const PropertyList = () => {
     return (
       <Col key={property.id} md={4}>
         <div className="property-list-item">
-          <Card>
-            <Card.Body>
-              <Link to={detailLink} className="card-link">
+          <Link to={detailLink} className="card-link">
+            <Card className="property-list-card">
+              <Card.Body>
                 <Card.Title>{title}</Card.Title>
-              </Link>
-            </Card.Body>
-          </Card>
+              </Card.Body>
+            </Card>
+          </Link>
         </div>
       </Col>
     );

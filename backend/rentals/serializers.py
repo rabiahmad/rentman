@@ -13,6 +13,7 @@ class TenantSerializer(serializers.HyperlinkedModelSerializer):
             "last_name",
             "phone",
             "email",
+            "notes",
         ]
 
 
@@ -27,6 +28,7 @@ class LandlordSerializer(serializers.HyperlinkedModelSerializer):
             "last_name",
             "phone",
             "email",
+            "notes",
         ]
 
 
@@ -40,6 +42,7 @@ class PropertySerializer(serializers.HyperlinkedModelSerializer):
             "town",
             "postcode",
             "property_type",
+            # "landlord",
         ]
 
 

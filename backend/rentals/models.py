@@ -12,14 +12,16 @@ class BasePerson(models.Model):
         DR = "Dr"
 
     title = models.CharField(choices=Title.choices, max_length=4)
-    first_name = models.TextField(null=False, blank=False)
-    middle_name = models.TextField(null=True, blank=True)
-    last_name = models.TextField(null=False, blank=False)
-    phone = PhoneNumberField()  # TODO add regex validations for phone numbers
-    email = models.EmailField(null=True, blank=True)
+    first_name = models.TextField(null=False, blank=False, max_length=50)
+    middle_name = models.TextField(null=True, blank=True, max_length=50)
+    last_name = models.TextField(null=False, blank=False, max_length=50)
+    phone = PhoneNumberField()
+    email = models.EmailField(null=True, blank=True, max_length=50)
+    notes = models.TextField(null=True, blank=True)
 
     class Meta:
         abstract = True
+        ordering = ["first_name", "last_name"]
 
     def __str__(self):
         middle_name = self.middle_name if self.middle_name else ""
@@ -42,9 +44,9 @@ class Property(models.Model):
     landlord = models.ForeignKey(
         Landlord, on_delete=models.CASCADE, null=True, blank=True
     )
-    house_number = models.TextField(null=False, blank=False)
-    street = models.TextField(null=False, blank=False)
-    town = models.TextField(null=False, blank=False)
+    house_number = models.TextField(null=False, blank=False, max_length=10)
+    street = models.TextField(null=False, blank=False, max_length=50)
+    town = models.TextField(null=False, blank=False, max_length=50)
     postcode = models.TextField(
         max_length=8, blank=False, null=False
     )  # TODO add regex validation for postcode
