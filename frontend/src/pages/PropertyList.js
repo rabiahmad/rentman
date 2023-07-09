@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import "../assets/css/ListItem.css";
 
 const PropertyList = () => {
@@ -21,7 +22,6 @@ const PropertyList = () => {
     } catch (error) {
       console.error("Error fetching properties:", error);
     } finally {
-      // completeRefresh();
     }
   };
 
@@ -41,16 +41,10 @@ const PropertyList = () => {
   return (
     <div>
       <h2>Properties</h2>
-      <ul>{properties.map((property) => generateOutput(property))}</ul>
+      <div className="list-container">{properties.map((property) => generateOutput(property))}</div>
 
       <Link to="/properties/add">
-        <img
-          width="45"
-          height="45"
-          src="https://img.icons8.com/color/48/filled-plus-2-math.png"
-          href="/properties/add"
-          alt="Add new property"
-        />
+        <Button variant="primary">Add Property</Button>
       </Link>
     </div>
   );

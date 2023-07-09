@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../assets/css/ListItem.css";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const TenantList = () => {
   let [tenants, setTenants] = useState([]);
@@ -16,7 +17,7 @@ const TenantList = () => {
   };
 
   const generateOutput = (tenant) => {
-    const name = tenant.first_name + " " + tenant.middle_name + " " + tenant.last_name;
+    const name = tenant.first_name + (tenant.middle_name ? " " + tenant.middle_name : "") + " " + tenant.last_name;
     const tenantDetailLink = `/tenants/${tenant.id}`;
 
     return (
@@ -31,9 +32,9 @@ const TenantList = () => {
   return (
     <div>
       <h2>Tenants</h2>
-      <ul>{tenants.map((tenant) => generateOutput(tenant))}</ul>
+      <div className="list-container">{tenants.map((tenant) => generateOutput(tenant))}</div>
       <Link to="/tenants/add">
-        <img width="45" height="45" src="https://img.icons8.com/color/48/filled-plus-2-math.png" alt="Add new tenant" />
+        <Button variant="primary">Add Tenant</Button>
       </Link>
     </div>
   );

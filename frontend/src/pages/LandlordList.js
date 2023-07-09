@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const LandlordList = () => {
   let [landlords, setLandlords] = useState([]);
@@ -15,7 +16,9 @@ const LandlordList = () => {
   };
 
   const generateOutput = (landlord) => {
-    const name = landlord.first_name + " " + landlord.middle_name + " " + landlord.last_name;
+    const name =
+      landlord.first_name + (landlord.middle_name ? " " + landlord.middle_name : "") + " " + landlord.last_name;
+
     const landlordDetailLink = `/landlords/${landlord.id}`;
 
     return (
@@ -30,14 +33,9 @@ const LandlordList = () => {
   return (
     <div>
       <h2>Landlords</h2>
-      <ul>{landlords.map((landlord) => generateOutput(landlord))}</ul>
+      <div className="list-container">{landlords.map((landlord) => generateOutput(landlord))}</div>
       <Link to="/landlords/add">
-        <img
-          width="45"
-          height="45"
-          src="https://img.icons8.com/color/48/filled-plus-2-math.png"
-          alt="Add new landlord"
-        />
+        <Button variant="primary">Add Landlord</Button>
       </Link>
     </div>
   );

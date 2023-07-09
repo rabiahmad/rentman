@@ -56,6 +56,32 @@ const Navbar = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
+            <NavDropdown title="Reports" id="basic-nav-dropdown">
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="#">
+                  Upcoming rents
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="#">
+                  Overdue rents
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="#">
+                  Revenue report
+                </Link>
+              </NavDropdown.Item>
+
+              <NavDropdown.Item>
+                <Link className="dropdown-item" to="#">
+                  Property map
+                </Link>
+              </NavDropdown.Item>
+            </NavDropdown>
+
             <li className="nav-item">
               <Link className="nav-link disabled" to="#">
                 Admin

@@ -9,12 +9,13 @@ import PropertyDetail from "./pages/PropertyDetail";
 import TenantDetail from "./pages/TenantDetail";
 import LandlordDetail from "./pages/LandlordDetail";
 import AddPropertyForm from "./pages/AddPropertyForm";
+import AddTenantForm from "./pages/AddTenantForm";
 
 const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <div className="container-fluid">
+      <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/properties" element={<PropertyList />} />
@@ -22,7 +23,7 @@ const App = () => {
           <Route path="/properties/:propertyId" element={<PropertyDetail />} />
           <Route path="/properties/:propertyId/edit" element={<AddPropertyForm />} />
           <Route path="/tenants" element={<TenantList />} />
-          <Route path="/tenants/add" element={<Home />} />
+          <Route path="/tenants/add" element={<AddTenantForm />} />
           <Route path="/tenants/:tenantId" element={<TenantDetail />} />
           <Route path="/landlords" element={<LandlordList />} />
           <Route path="/landlords/add" element={<Home />} />

@@ -1,10 +1,11 @@
-from .models import Tenant, Landlord, Property, Tenancy
+from .models import BasePerson, Tenant, Landlord, Property, Tenancy
 from .serializers import (
     TenantSerializer,
     LandlordSerializer,
     PropertySerializer,
     TenancySerializer,
     PropertyTypeSerializer,
+    TitleSerializer,
 )
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
@@ -18,7 +19,7 @@ class TenantViewSet(viewsets.ModelViewSet):
 
     queryset = Tenant.objects.all()
     serializer_class = TenantSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class LandlordViewSet(viewsets.ModelViewSet):
@@ -58,3 +59,12 @@ def property_type_list(request):
     serializer = PropertyTypeSerializer(data=data)
     serializer.is_valid()
     return Response(serializer.data)
+
+
+@api_view(["GET"])
+def title_list(request):
+    titles = [choice[0] for choice in Tenant.Title.choices]
+    data = {"title": titles}
+    serializer = TitleSerializer(data=data)
+    serializer.is_valid()
+    return Response(serializer.initial_data)
