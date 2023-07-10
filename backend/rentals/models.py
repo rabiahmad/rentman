@@ -127,3 +127,9 @@ class Contractor(models.Model):
     phone = PhoneNumberField()
     email = models.EmailField(null=True, blank=True, max_length=50)
     website = models.TextField(null=True, blank=True, max_length=255)
+
+    def __str__(self):
+        if self.contractor_type == "Business":
+            return self.company_name
+        else:
+            return self.first_name + " " + self.last_name
