@@ -10,6 +10,8 @@ import TenantDetail from "./pages/TenantDetail";
 import LandlordDetail from "./pages/LandlordDetail";
 import AddPropertyForm from "./pages/AddPropertyForm";
 import AddTenantForm from "./pages/AddTenantForm";
+import ContractorList from "./pages/ContractorList";
+import AddContractorForm from "./pages/AddContractorForm";
 
 const App = () => {
   return (
@@ -28,6 +30,9 @@ const App = () => {
           <Route path="/landlords" element={<LandlordList />} />
           <Route path="/landlords/add" element={<Home />} />
           <Route path="/landlords/:landlordId" element={<LandlordDetail />} />
+          <Route path="/contractors" element={<ContractorList />} />
+          <Route path="/contractors/add" element={<AddContractorForm />} />
+          <Route path="/contractors/:contractorId" element={<Home />} />
         </Routes>
       </div>
     </div>

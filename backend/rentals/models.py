@@ -96,3 +96,34 @@ class Tenancy(models.Model):
         ]
 
         return " / ".join([str(f) for f in fields_to_concat])
+
+
+class Contractor(models.Model):
+    class ServiceType(models.TextChoices):
+        PLUMBING = "Plumbing"
+        ELECTRICIAN = "Electrician"
+        LOCKSMITH = "Locksmith"
+        CLEANER = "Cleaning services"
+        GARDENER = "Gardener"
+        BUILDER = "Builder"
+        GENERAL = "General services"
+        OTHER = "Other"
+
+    class ContractorType(models.TextChoices):
+        PERSON = "Person"
+        BUSINESS = "Business"
+
+    contractor_type = models.CharField(
+        choices=ContractorType.choices, max_length=10, null=False, blank=False
+    )
+
+    service_type = models.CharField(
+        choices=ServiceType.choices, max_length=50, null=False, blank=False
+    )
+
+    company_name = models.TextField(null=True, blank=True, max_length=100)
+    first_name = models.TextField(null=True, blank=True, max_length=50)
+    last_name = models.TextField(null=True, blank=True, max_length=50)
+    phone = PhoneNumberField()
+    email = models.EmailField(null=True, blank=True, max_length=50)
+    website = models.TextField(null=True, blank=True, max_length=255)

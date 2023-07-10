@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Tenant, Landlord, Property, Tenancy
+from .models import Tenant, Landlord, Property, Tenancy, Contractor
 
 
 class TenantSerializer(serializers.HyperlinkedModelSerializer):
@@ -67,3 +67,36 @@ class PropertyTypeSerializer(serializers.Serializer):
 
 class TitleSerializer(serializers.Serializer):
     title = serializers.CharField()
+
+
+class ContractorSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Contractor
+        fields = [
+            "id",
+            "contractor_type",
+            "service_type",
+            "company_name",
+            "first_name",
+            "last_name",
+            "phone",
+            "email",
+            "website",
+        ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if data.get("contractor_type") == Contractor.ContractorType.PERSON:
+            data.pop("company_name")
+        else:
+            data.pop("first_name")
+            data.pop("last_name")
+        return data
+
+
+class ContractorTypeSerializer(serializers.Serializer):
+    contractor_type = serializers.CharField()
+
+
+class ContractorServiceTypeSerializer(serializers.Serializer):
+    service_type = serializers.CharField()
