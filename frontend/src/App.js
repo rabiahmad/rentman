@@ -12,6 +12,7 @@ import AddPropertyForm from "./pages/AddPropertyForm";
 import AddTenantForm from "./pages/AddTenantForm";
 import ContractorList from "./pages/ContractorList";
 import AddContractorForm from "./pages/AddContractorForm";
+import ContractorDetail from "./pages/ContractorDetail";
 
 const App = () => {
   return (
@@ -32,7 +33,7 @@ const App = () => {
           <Route path="/landlords/:landlordId" element={<LandlordDetail />} />
           <Route path="/contractors" element={<ContractorList />} />
           <Route path="/contractors/add" element={<AddContractorForm />} />
-          <Route path="/contractors/:contractorId" element={<Home />} />
+          <Route path="/contractors/:contractorId" element={<ContractorDetail />} />
         </Routes>
       </div>
     </div>
