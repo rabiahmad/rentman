@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 
 const TenancyDetail = (props) => {
   const tenancy = props.tenancy;
+  const propertyId = props.propertyId;
+  console.log(`[TenancyDetail] propertyId is ${propertyId}`);
   return (
     <div>
       Tenancy ID: {tenancy.id} <br />
@@ -15,7 +17,7 @@ const TenancyDetail = (props) => {
           tenancy.tenants.map((tenantId) => (
             <Col key={tenantId} xs={12} sm={6} md={4} lg={3}>
               <div key={tenantId} style={{ padding: "0rem", marginTop: "1rem" }}>
-                <TenantCard tenantId={tenantId} />
+                <TenantCard tenantId={tenantId} propertyId={props.propertyId} />
               </div>
             </Col>
           ))}

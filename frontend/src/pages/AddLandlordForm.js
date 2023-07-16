@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const AddTenantForm = () => {
+const AddLandlordForm = () => {
   const location = useLocation();
-  const tenantData = location.state;
-  const propertyId = tenantData?.propertyId;
+  const landlordData = location.state;
   const navigate = useNavigate();
   const [titles, setTitles] = useState([]);
   const [formData, setFormData] = useState({
@@ -13,10 +12,8 @@ const AddTenantForm = () => {
     street: "",
     town: "",
     postcode: "",
-    tenant_type: "",
+    landlord_type: "",
   });
-
-  console.log(`[AddTenantForm] propertyId is ${propertyId}`);
 
   useEffect(() => {
     const fetchTitleOptions = async () => {
@@ -37,10 +34,10 @@ const AddTenantForm = () => {
   }, []);
 
   useEffect(() => {
-    if (tenantData) {
-      setFormData(tenantData);
+    if (landlordData) {
+      setFormData(landlordData);
     }
-  }, [tenantData]);
+  }, [landlordData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,11 +50,11 @@ const AddTenantForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let url = "/api/rentals/tenants/";
+      let url = "/api/rentals/landlords/";
       let method = "POST";
 
-      if (tenantData) {
-        url += `${tenantData.id}/`;
+      if (landlordData) {
+        url += `${landlordData.id}/`;
         method = "PUT";
       }
 
@@ -71,39 +68,25 @@ const AddTenantForm = () => {
 
       if (response.ok) {
         if (method === "POST") {
-          console.log("Tenant added successfully!");
-          navigate("/tenants/");
+          console.log("Landlord added successfully!");
+          navigate("/landlords/");
         } else {
-          console.log("Tenant updated successfully!");
-          if (propertyId) {
-            console.log({ propertyId });
-            navigate(`/properties/${propertyId}`);
-          } else if (tenantData) {
-            console.log("Going back to tenant detail page");
-            navigate(`/tenants/${tenantData.id}`);
-          } else {
-            console.log("Going back to tenant list page");
-            navigate("/tenants");
-          }
+          console.log("Landlord updated successfully!");
+          navigate(`/landlords/${landlordData.id}`);
         }
       } else {
-        console.error("Error saving tenant. Please try again.");
+        console.error("Error saving landlord. Please try again.");
       }
     } catch (error) {
-      console.error("Error saving tenant:", error);
+      console.error("Error saving landlord:", error);
     }
   };
 
   const handleCancel = () => {
-    if (propertyId) {
-      console.log({ propertyId });
-      navigate(`/properties/${propertyId}`);
-    } else if (tenantData) {
-      console.log("Going back to tenant detail page");
-      navigate(`/tenants/${tenantData.id}`);
+    if (landlordData) {
+      navigate(`/landlords/${landlordData.id}`);
     } else {
-      console.log("Going back to tenant list page");
-      navigate("/tenants");
+      navigate("/landlords");
     }
   };
 
@@ -151,11 +134,11 @@ const AddTenantForm = () => {
           Cancel
         </Button>
         <Button variant="primary" type="submit" style={{ marginLeft: "10px" }}>
-          {tenantData ? "Update" : "Create"}
+          {landlordData ? "Update" : "Create"}
         </Button>
       </div>
     </Form>
   );
 };
 
-export default AddTenantForm;
+export default AddLandlordForm;

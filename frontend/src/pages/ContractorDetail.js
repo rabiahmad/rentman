@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Button from "react-bootstrap/Button";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 const ContractorDetail = () => {
   const { contractorId } = useParams();
   const [contractor, setContractor] = useState(null);
   const [name, setName] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +43,27 @@ const ContractorDetail = () => {
     }
   }, [contractor]);
 
+  const handleEdit = () => {
+    navigate(`/contractors/${contractor?.id}/edit`, { state: contractor });
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`/api/rentals/contractors/${contractorId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log("Contractor deleted successfully!");
+        navigate("/contractors");
+      } else {
+        console.error("Error deleting contractor. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error deleting contractor:", error);
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -52,6 +78,20 @@ const ContractorDetail = () => {
           {contractor.contractor_type === "Business" && <p>Website: {contractor.website}</p>}
         </div>
       )}
+      <div style={{ display: "flex", gap: "1rem", marginBottom: "20px", marginTop: "10px" }}>
+        <Button variant="danger" onClick={() => setModalShow(true)}>
+          <AiOutlineDelete />
+        </Button>
+        <Button variant="primary" onClick={handleEdit}>
+          <AiOutlineEdit />
+        </Button>
+      </div>
+      <ConfirmDeleteModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onDelete={handleDelete}
+        itemName="contractor"
+      />
     </div>
   );
 };

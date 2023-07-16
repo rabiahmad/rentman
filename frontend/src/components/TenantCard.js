@@ -1,30 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-const TenantCard = ({ tenantId }) => {
+const TenantCard = ({ tenantId, propertyId }) => {
+  // const { tenantId } = useParams();
   const [tenant, setTenant] = useState(null);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  console.log(`[TenantCard] propertyId is ${propertyId}`);
 
   useEffect(() => {
-    const fetchTenantDetails = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch(`/api/rentals/tenants/${tenantId}`);
         if (response.ok) {
           const tenantData = await response.json();
           setTenant(tenantData);
         } else {
-          console.error(`Error fetching tenant with ID ${tenantId}`);
+          console.error(`0 Error fetching tenant with ID ${tenantId}`);
         }
       } catch (error) {
-        console.error(`Error fetching tenant with ID ${tenantId}:`, error);
+        console.error(`1 Error fetching tenant with ID ${tenantId}:`, error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchTenantDetails();
+    fetchData();
   }, [tenantId]);
 
-  if (!tenant) {
+  const handleEdit = () => {
+    navigate(`/tenants/${tenant?.id}/edit`, { state: { ...tenant, propertyId } });
+  };
+
+  if (!tenant || loading) {
     return <LoadingSpinner />;
   }
 
@@ -33,7 +44,7 @@ const TenantCard = ({ tenantId }) => {
       <Card.Img variant="top" />
       <Card.Body>
         <Card.Title>
-          {tenant.first_name} {tenant.last_name}
+          {tenant.first_name} {tenant.middle_name} {tenant.last_name}
         </Card.Title>
         <Card.Text>
           <div>
@@ -48,7 +59,9 @@ const TenantCard = ({ tenantId }) => {
           <Button variant="primary" href={`/tenants/${tenantId}`}>
             View
           </Button>
-          <Button variant="secondary">Edit</Button>
+          <Button variant="secondary" onClick={handleEdit}>
+            Edit
+          </Button>
         </div>
       </Card.Footer>
     </Card>

@@ -51,6 +51,12 @@ const AddContractorForm = () => {
     getServiceTypes().catch((error) => console.error("Error setting service types:", error));
   }, []);
 
+  useEffect(() => {
+    if (contractorData) {
+      setFormData(contractorData);
+    }
+  }, [contractorData]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

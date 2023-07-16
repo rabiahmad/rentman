@@ -87,7 +87,12 @@ const PropertyDetail = () => {
           <AiOutlineEdit />
         </Button>
       </div>
-      <ConfirmDeleteModal show={modalShow} onHide={() => setModalShow(false)} onDelete={handleDelete} />
+      <ConfirmDeleteModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        onDelete={handleDelete}
+        itemName="property"
+      />
       {tenancies.length > 0 && tenancies.some((tenancy) => tenancy.property === property.id) ? (
         <>
           <h3>Tenancy contracts</h3>
@@ -99,7 +104,7 @@ const PropertyDetail = () => {
                   <Accordion.Item eventKey={index}>
                     <Accordion.Header>Tenancy Contract #{index + 1}</Accordion.Header>
                     <Accordion.Body>
-                      <TenancyDetail tenancy={tenancy} />
+                      <TenancyDetail tenancy={tenancy} propertyId={propertyId} />
                     </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
